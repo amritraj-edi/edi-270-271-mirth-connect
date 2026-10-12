@@ -1,0 +1,258 @@
+<channel version="4.5.0">
+  <id>13a0f9ae-f52c-44bd-b14c-6cfc1f735c3c</id>
+  <nextMetaDataId>2</nextMetaDataId>
+  <name>EDI271 to XML Parsing</name>
+  <description></description>
+  <revision>6</revision>
+  <sourceConnector version="4.5.0">
+    <metaDataId>0</metaDataId>
+    <name>sourceConnector</name>
+    <properties class="com.mirth.connect.connectors.vm.VmReceiverProperties" version="4.5.0">
+      <pluginProperties/>
+      <sourceConnectorProperties version="4.5.0">
+        <responseVariable>None</responseVariable>
+        <respondAfterProcessing>true</respondAfterProcessing>
+        <processBatch>false</processBatch>
+        <firstResponse>false</firstResponse>
+        <processingThreads>1</processingThreads>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+        <queueBufferSize>1000</queueBufferSize>
+      </sourceConnectorProperties>
+    </properties>
+    <transformer version="4.5.0">
+      <elements/>
+      <inboundDataType>EDI/X12</inboundDataType>
+      <outboundDataType>EDI/X12</outboundDataType>
+      <inboundProperties class="com.mirth.connect.plugins.datatypes.edi.EDIDataTypeProperties" version="4.5.0">
+        <serializationProperties class="com.mirth.connect.plugins.datatypes.edi.EDISerializationProperties" version="4.5.0">
+          <segmentDelimiter>~</segmentDelimiter>
+          <elementDelimiter>*</elementDelimiter>
+          <subelementDelimiter>:</subelementDelimiter>
+          <inferX12Delimiters>true</inferX12Delimiters>
+        </serializationProperties>
+        <batchProperties class="com.mirth.connect.plugins.datatypes.edi.EDIBatchProperties" version="4.5.0">
+          <splitType>JavaScript</splitType>
+          <batchScript></batchScript>
+        </batchProperties>
+      </inboundProperties>
+      <outboundProperties class="com.mirth.connect.plugins.datatypes.edi.EDIDataTypeProperties" version="4.5.0">
+        <serializationProperties class="com.mirth.connect.plugins.datatypes.edi.EDISerializationProperties" version="4.5.0">
+          <segmentDelimiter>~</segmentDelimiter>
+          <elementDelimiter>*</elementDelimiter>
+          <subelementDelimiter>:</subelementDelimiter>
+          <inferX12Delimiters>true</inferX12Delimiters>
+        </serializationProperties>
+        <batchProperties class="com.mirth.connect.plugins.datatypes.edi.EDIBatchProperties" version="4.5.0">
+          <splitType>JavaScript</splitType>
+          <batchScript></batchScript>
+        </batchProperties>
+      </outboundProperties>
+    </transformer>
+    <filter version="4.5.0">
+      <elements/>
+    </filter>
+    <transportName>Channel Reader</transportName>
+    <mode>SOURCE</mode>
+    <enabled>true</enabled>
+    <waitForPrevious>true</waitForPrevious>
+  </sourceConnector>
+  <destinationConnectors>
+    <connector version="4.5.0">
+      <metaDataId>1</metaDataId>
+      <name>EDI271 to XML maping</name>
+      <properties class="com.mirth.connect.connectors.file.FileDispatcherProperties" version="4.5.0">
+        <pluginProperties/>
+        <destinationConnectorProperties version="4.5.0">
+          <queueEnabled>false</queueEnabled>
+          <sendFirst>false</sendFirst>
+          <retryIntervalMillis>10000</retryIntervalMillis>
+          <regenerateTemplate>false</regenerateTemplate>
+          <retryCount>0</retryCount>
+          <rotate>false</rotate>
+          <includeFilterTransformer>false</includeFilterTransformer>
+          <threadCount>1</threadCount>
+          <threadAssignmentVariable></threadAssignmentVariable>
+          <validateResponse>false</validateResponse>
+          <resourceIds class="linked-hash-map">
+            <entry>
+              <string>Default Resource</string>
+              <string>[Default Resource]</string>
+            </entry>
+          </resourceIds>
+          <queueBufferSize>1000</queueBufferSize>
+          <reattachAttachments>true</reattachAttachments>
+        </destinationConnectorProperties>
+        <scheme>FILE</scheme>
+        <host>C:/Users/amrit/OneDrive/Desktop/Taliun Assignment/Write</host>
+        <outputPattern>Sample EDI271 to XML_${DATE}_${SYSTIME}.xml</outputPattern>
+        <anonymous>true</anonymous>
+        <username>anonymous</username>
+        <password>anonymous</password>
+        <timeout>10000</timeout>
+        <keepConnectionOpen>true</keepConnectionOpen>
+        <maxIdleTime>0</maxIdleTime>
+        <secure>true</secure>
+        <passive>true</passive>
+        <validateConnection>true</validateConnection>
+        <outputAppend>true</outputAppend>
+        <errorOnExists>false</errorOnExists>
+        <temporary>false</temporary>
+        <binary>false</binary>
+        <charsetEncoding>DEFAULT_ENCODING</charsetEncoding>
+        <template>${message.encodedData}</template>
+      </properties>
+      <transformer version="4.5.0">
+        <elements>
+          <com.mirth.connect.plugins.javascriptstep.JavaScriptStep version="4.5.0">
+            <sequenceNumber>0</sequenceNumber>
+            <enabled>true</enabled>
+            <script>tmp[&apos;Payer&apos;][&apos;PayerName&apos;] = msg[&apos;NM1&apos;][0][&apos;NM1.03&apos;][&apos;NM1.03.1&apos;].toString()
+tmp[&apos;Payer&apos;][&apos;PayerIdentificationCode&apos;] = msg[&apos;NM1&apos;][0][&apos;NM1.09&apos;][&apos;NM1.09.1&apos;].toString()
+tmp[&apos;Provider&apos;][&apos;ProviderName&apos;] = msg[&apos;NM1&apos;][1][&apos;NM1.03&apos;][&apos;NM1.03.1&apos;].toString()
+tmp[&apos;Provider&apos;][&apos;ProviderIdentificationCode&apos;] = msg[&apos;NM1&apos;][1][&apos;NM1.09&apos;][&apos;NM1.09.1&apos;].toString()
+tmp[&apos;Subscriber&apos;][&apos;SubscriberName&apos;] = msg[&apos;NM1&apos;][2][&apos;NM1.04&apos;][&apos;NM1.04.1&apos;].toString() + &quot; &quot; + msg[&apos;NM1&apos;][2][&apos;NM1.03&apos;][&apos;NM1.03.1&apos;].toString()
+tmp[&apos;Subscriber&apos;][&apos;SubscriberDOB&apos;] = msg[&apos;DMG&apos;][&apos;DMG.02&apos;][&apos;DMG.02.1&apos;].toString()
+tmp[&apos;Subscriber&apos;][&apos;SubscriberGender&apos;] = msg[&apos;DMG&apos;][&apos;DMG.03&apos;][&apos;DMG.03.1&apos;].toString()
+tmp[&apos;Subscriber&apos;][&apos;SubscriberIdentificationCode&apos;] = msg[&apos;NM1&apos;][2][&apos;NM1.09&apos;][&apos;NM1.09.1&apos;].toString()
+tmp[&apos;Subscriber&apos;][&apos;SubscriberAddress&apos;] = msg[&apos;N3&apos;][&apos;N3.01&apos;][&apos;N3.01.1&apos;].toString() + &quot; &quot; + msg[&apos;N3&apos;][&apos;N3.02&apos;][&apos;N3.02.1&apos;].toString()
+tmp[&apos;Subscriber&apos;][&apos;SubscriberCity&apos;] = msg[&apos;N4&apos;][&apos;N4.01&apos;][&apos;N4.01.1&apos;].toString()
+tmp[&apos;Subscriber&apos;][&apos;SubscriberState&apos;] = msg[&apos;N4&apos;][&apos;N4.02&apos;][&apos;N4.02.1&apos;].toString()
+tmp[&apos;Subscriber&apos;][&apos;SubscriberPostalCode&apos;] = msg[&apos;N4&apos;][&apos;N4.03&apos;][&apos;N4.03.1&apos;].toString()
+tmp[&apos;Plan&apos;][&apos;BenefitPlaneName&apos;] = msg[&apos;EB&apos;][0][&apos;EB.05&apos;][&apos;EB.05.1&apos;].toString()
+tmp[&apos;Plan&apos;][&apos;PlanBeginDate&apos;] = msg[&apos;DTP&apos;][&apos;DTP.03&apos;][&apos;DTP.03.1&apos;].toString()
+tmp[&apos;PCP&apos;][&apos;PCPName&apos;] = msg[&apos;NM1&apos;][3][&apos;NM1.04&apos;][&apos;NM1.04.1&apos;].toString() + &quot; &quot; + msg[&apos;NM1&apos;][3][&apos;NM1.03&apos;][&apos;NM1.03.1&apos;].toString()
+tmp[&apos;PCP&apos;][&apos;PCPIdentificationCode&apos;] = msg[&apos;NM1&apos;][3][&apos;NM1.09&apos;][&apos;NM1.09.1&apos;].toString()</script>
+          </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
+        </elements>
+        <inboundTemplate encoding="base64">SVNBKjAwKiAgICAgICAgICAqMDAqICAgICAgICAgICpaWioxMjM0NTY3ICAgICAgICAqWloqMTExMTEgICAgICAgICAgKjE3MDUwOCoxMTQxKj4qMDA1MDEqMDAwMDAwMTAxKjEqUCo6fgpHUypIQypYWFhYWFhYKlhYWFhYKjIwMTcwNjE3KjE3NDEqMTAxKlgqMDA1MDEwWDI3OUExfgpTVCoyNzEqNDMyMSowMDUwMTBYMjc5QTF+CkJIVCowMDIyKjExKjEwMDAxMjM0KjIwMDYwNTAxKjEzMTl+CkhMKjEqKjIwKjF+Ck5NMSpQUioyKkFCQyBDT01QQU5ZKioqKipQSSo4NDI2MTAwMDF+CkhMKjIqMSoyMSoxfgpOTTEqMVAqMipCT05FIEFORCBKT0lOVCBDTElOSUMqKioqKlNWKjIwMDAwMzV+CkhMKjMqMioyMiowfgpUUk4qMio5MzE3NS0wMTI1NDcqOTg3NzI4MTIzNH4KTk0xKklMKjEqU01JVEgqSk9ITioqKipNSSoxMjM0NTY3ODl+Ck4zKjE1MTk3IEJST0FEV0FZIEFWRU5VRSpBUFQgMjE1fgpONCpLQU5TQVMgQ0lUWSpNTyo2NDEwOH4KRE1HKkQ4KjE5NjMwNTE5Kk1+CkRUUCozNDYqRDgqMjAwNjAxMDF+CkVCKjEqKjMwKipHT0xEIDEyMyBQTEFOfgpFQipMfgpFQioxKioxPjMzPjM1PjQ3Pjg2Pjg4Pjk4PkFMPk1IPlVDfgpFQipCKioxPjMzPjM1PjQ3Pjg2Pjg4Pjk4PkFMPk1IPlVDKkhNKkdPTEQgMTIzIFBMQU4qMjcqMTAqKioqKll+CkVCKkIqKjE+MzM+MzU+NDc+ODY+ODg+OTg+QUw+TUg+VUMqSE0qR09MRCAxMjMgUExBTioyNyozMCoqKioqTn4KTFMqMjEyMH4KTk0xKlAzKjEqSk9ORVMqTUFSQ1VTKioqKlNWKjAyMDIwMzR+CkxFKjIxMjB+ClNFKjIyKjQzMjF+CkdFKjEqMTAxfgpJRUEqMSowMDAwMDAxMDF+</inboundTemplate>
+        <outboundTemplate encoding="base64">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxFREkyNzF0b1hNTD4NCiAgPFBheWVyPg0KCTxQYXllck5hbWU+PC9QYXllck5hbWU+DQoJPFBheWVySWRlbnRpZmljYXRpb25Db2RlPjwvUGF5ZXJJZGVudGlmaWNhdGlvbkNvZGU+DQogIDwvUGF5ZXI+DQogIDxQcm92aWRlcj4NCgk8UHJvdmlkZXJOYW1lPjwvUHJvdmlkZXJOYW1lPg0KCTxQcm92aWRlcklkZW50aWZpY2F0aW9uQ29kZT48L1Byb3ZpZGVySWRlbnRpZmljYXRpb25Db2RlPg0KICA8L1Byb3ZpZGVyPg0KICA8U3Vic2NyaWJlcj4NCgk8U3Vic2NyaWJlck5hbWU+PC9TdWJzY3JpYmVyTmFtZT4NCgk8U3Vic2NyaWJlckRPQj48L1N1YnNjcmliZXJET0I+DQoJPFN1YnNjcmliZXJHZW5kZXI+PC9TdWJzY3JpYmVyR2VuZGVyPg0KCTxTdWJzY3JpYmVySWRlbnRpZmljYXRpb25Db2RlPjwvU3Vic2NyaWJlcklkZW50aWZpY2F0aW9uQ29kZT4NCgk8U3Vic2NyaWJlckFkZHJlc3M+PC9TdWJzY3JpYmVyQWRkcmVzcz4NCgk8U3Vic2NyaWJlckNpdHk+PC9TdWJzY3JpYmVyQ2l0eT4NCgk8U3Vic2NyaWJlclN0YXRlPjwvU3Vic2NyaWJlclN0YXRlPg0KCTxTdWJzY3JpYmVyUG9zdGFsQ29kZT48L1N1YnNjcmliZXJQb3N0YWxDb2RlPg0KICA8L1N1YnNjcmliZXI+DQogIDxQbGFuPg0KCTxCZW5lZml0UGxhbmVOYW1lPjwvQmVuZWZpdFBsYW5lTmFtZT4NCgk8UGxhbkJlZ2luRGF0ZT48L1BsYW5CZWdpbkRhdGU+DQogIDwvUGxhbj4NCiAgPFBDUD4NCgk8UENQTmFtZT48L1BDUE5hbWU+DQoJPFBDUElkZW50aWZpY2F0aW9uQ29kZT48L1BDUElkZW50aWZpY2F0aW9uQ29kZT4NCiAgPC9QQ1A+DQo8L0VESTI3MXRvWE1MPg==</outboundTemplate>
+        <inboundDataType>EDI/X12</inboundDataType>
+        <outboundDataType>XML</outboundDataType>
+        <inboundProperties class="com.mirth.connect.plugins.datatypes.edi.EDIDataTypeProperties" version="4.5.0">
+          <serializationProperties class="com.mirth.connect.plugins.datatypes.edi.EDISerializationProperties" version="4.5.0">
+            <segmentDelimiter>~</segmentDelimiter>
+            <elementDelimiter>*</elementDelimiter>
+            <subelementDelimiter>:</subelementDelimiter>
+            <inferX12Delimiters>true</inferX12Delimiters>
+          </serializationProperties>
+          <batchProperties class="com.mirth.connect.plugins.datatypes.edi.EDIBatchProperties" version="4.5.0">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </inboundProperties>
+        <outboundProperties class="com.mirth.connect.plugins.datatypes.xml.XMLDataTypeProperties" version="4.5.0">
+          <serializationProperties class="com.mirth.connect.plugins.datatypes.xml.XMLSerializationProperties" version="4.5.0">
+            <stripNamespaces>false</stripNamespaces>
+          </serializationProperties>
+          <batchProperties class="com.mirth.connect.plugins.datatypes.xml.XMLBatchProperties" version="4.5.0">
+            <splitType>Element_Name</splitType>
+            <elementName></elementName>
+            <level>1</level>
+            <query></query>
+            <batchScript></batchScript>
+          </batchProperties>
+        </outboundProperties>
+      </transformer>
+      <responseTransformer version="4.5.0">
+        <elements/>
+        <inboundDataType>XML</inboundDataType>
+        <outboundDataType>XML</outboundDataType>
+        <inboundProperties class="com.mirth.connect.plugins.datatypes.xml.XMLDataTypeProperties" version="4.5.0">
+          <serializationProperties class="com.mirth.connect.plugins.datatypes.xml.XMLSerializationProperties" version="4.5.0">
+            <stripNamespaces>false</stripNamespaces>
+          </serializationProperties>
+          <batchProperties class="com.mirth.connect.plugins.datatypes.xml.XMLBatchProperties" version="4.5.0">
+            <splitType>Element_Name</splitType>
+            <elementName></elementName>
+            <level>1</level>
+            <query></query>
+            <batchScript></batchScript>
+          </batchProperties>
+        </inboundProperties>
+        <outboundProperties class="com.mirth.connect.plugins.datatypes.xml.XMLDataTypeProperties" version="4.5.0">
+          <serializationProperties class="com.mirth.connect.plugins.datatypes.xml.XMLSerializationProperties" version="4.5.0">
+            <stripNamespaces>false</stripNamespaces>
+          </serializationProperties>
+          <batchProperties class="com.mirth.connect.plugins.datatypes.xml.XMLBatchProperties" version="4.5.0">
+            <splitType>Element_Name</splitType>
+            <elementName></elementName>
+            <level>1</level>
+            <query></query>
+            <batchScript></batchScript>
+          </batchProperties>
+        </outboundProperties>
+      </responseTransformer>
+      <filter version="4.5.0">
+        <elements/>
+      </filter>
+      <transportName>File Writer</transportName>
+      <mode>DESTINATION</mode>
+      <enabled>true</enabled>
+      <waitForPrevious>true</waitForPrevious>
+    </connector>
+  </destinationConnectors>
+  <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+  <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+  <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+  <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+  <properties version="4.5.0">
+    <clearGlobalChannelMap>true</clearGlobalChannelMap>
+    <messageStorageMode>DEVELOPMENT</messageStorageMode>
+    <encryptData>false</encryptData>
+    <encryptAttachments>false</encryptAttachments>
+    <encryptCustomMetaData>false</encryptCustomMetaData>
+    <removeContentOnCompletion>false</removeContentOnCompletion>
+    <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+    <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+    <initialState>STARTED</initialState>
+    <storeAttachments>true</storeAttachments>
+    <metaDataColumns>
+      <metaDataColumn>
+        <name>SOURCE</name>
+        <type>STRING</type>
+        <mappingName>mirth_source</mappingName>
+      </metaDataColumn>
+      <metaDataColumn>
+        <name>TYPE</name>
+        <type>STRING</type>
+        <mappingName>mirth_type</mappingName>
+      </metaDataColumn>
+    </metaDataColumns>
+    <attachmentProperties version="4.5.0">
+      <type>None</type>
+      <properties/>
+    </attachmentProperties>
+    <resourceIds class="linked-hash-map">
+      <entry>
+        <string>Default Resource</string>
+        <string>[Default Resource]</string>
+      </entry>
+    </resourceIds>
+  </properties>
+  <exportData>
+    <metadata>
+      <enabled>true</enabled>
+      <lastModified>
+        <time>1721960700120</time>
+        <timezone>Asia/Calcutta</timezone>
+      </lastModified>
+      <pruningSettings>
+        <archiveEnabled>true</archiveEnabled>
+        <pruneErroredMessages>false</pruneErroredMessages>
+      </pruningSettings>
+      <userId>1</userId>
+    </metadata>
+  </exportData>
+</channel>

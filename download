@@ -1,0 +1,10 @@
+# Sensitive data and local artifacts
+*.edi
+*.x12
+*.dat
+*.hl7
+*.log
+*.env
+.env
+credentials*
+secrets*
