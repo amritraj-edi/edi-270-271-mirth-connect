@@ -17,10 +17,10 @@ Portfolio demonstration of four Mirth Connect channel configurations for parsing
 4. Produce CSV or XML output according to the channel mapping.
 
 ## How to review
-Open the channel XML files in a compatible Mirth Connect environment and inspect the source/transformer/destination configuration. These are exported channel definitions, not a packaged Mirth deployment. Test them in a non-production environment with synthetic data before relying on the output.
+Open the channel XML files in a compatible Mirth Connect environment and inspect the source/transformer/destination configuration. These are exported channel definitions, not a packaged Mirth deployment. The FILE destination path is a generic placeholder (`C:/EDI/output`); update it for your local test environment. Test them in a non-production environment with synthetic data before relying on the output.
 
 ## Data handling
-Original sample/result files were intentionally not included because they contained realistic names, identifiers, addresses, and dates. Public examples in this repository are synthetic. Do not commit production EDI files, PHI, credentials, endpoint details, or client-specific configuration.
+Original result files were excluded. Embedded channel test templates were replaced with synthetic sample transactions; public sample inputs use fabricated values. Public examples in this repository are synthetic. Do not commit production EDI files, PHI, credentials, endpoint details, or client-specific configuration.
 
 ## Limitations
 - This is a focused mapping exercise, not a complete X12 validator.
@@ -31,4 +31,5 @@ Original sample/result files were intentionally not included because they contai
 ## Portfolio summary
 Created Mirth Connect channel mappings to transform selected X12 270 eligibility inquiry and 271 eligibility response data into CSV and XML formats, using sample inputs and output templates to demonstrate parsing and data mapping.
 
-
+## Provenance note
+This project originated as a technical assignment. Publish only if you are permitted to share the exported channel definitions and mapping logic. If ownership or assignment confidentiality is unclear, keep the repository private until you have approval.

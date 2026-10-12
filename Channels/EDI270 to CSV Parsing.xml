@@ -88,11 +88,11 @@
           <reattachAttachments>true</reattachAttachments>
         </destinationConnectorProperties>
         <scheme>FILE</scheme>
-        <host>C:/Users/amrit/OneDrive/Desktop/Taliun Assignment/Write</host>
+        <host>C:/EDI/output</host>
         <outputPattern>Sample EDI270 to CSV_${DATE}_${SYSTIME}.csv</outputPattern>
         <anonymous>true</anonymous>
-        <username>anonymous</username>
-        <password>anonymous</password>
+        <username></username>
+        <password></password>
         <timeout>10000</timeout>
         <keepConnectionOpen>true</keepConnectionOpen>
         <maxIdleTime>0</maxIdleTime>
@@ -120,7 +120,7 @@ tmp[&apos;row&apos;][5][&apos;column2&apos;] = msg[&apos;NM1&apos;][2][&apos;NM1
 tmp[&apos;row&apos;][6][&apos;column2&apos;] = msg[&apos;DMG&apos;][&apos;DMG.02&apos;][&apos;DMG.02.1&apos;].toString()</script>
           </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
         </elements>
-        <inboundTemplate encoding="base64">SVNBKjAwKiAgICAgICAgICAqMDAqICAgICAgICAgICpaWioxMjM0NTY3ICAgICAgICAqWloqMTExMTEgICAgICAgICAgKjE3MDUwOCoxMTQxKl4qMDA1MDEqMDAwMDAwMTAxKjEqUCo6fgpHUypIQypYWFhYWFhYKlhYWFhYKjIwMTcwNjE3KjE3NDEqMTAxKlgqMDA1MDEwWDI3OUExfgpTVCoyNzAqMTIzNCowMDUwMTBYMjc5QTF+CkJIVCowMDIyKjEzKjEwMDAxMjM0KjIwMDYwNTAxKjEzMTl+CkhMKjEqKjIwKjF+Ck5NMSpQUioyKkFCQyBDT01QQU5ZKioqKipQSSo4NDI2MTAwMDF+CkhMKjIqMSoyMSoxfgpOTTEqMVAqMipCT05FIEFORCBKT0lOVCBDTElOSUMqKioqKlNWKjIwMDAwMzV+CkhMKjMqMioyMiowfgpUUk4qMSo5MzE3NS0wMTI1NDcqOTg3NzI4MTIzNH4KTk0xKklMKjEqU01JVEgqUk9CRVJUKioqKk1JKjExMTIyMzMzMzAxfgpETUcqRDgqMTk0MzA1MTl+CkRUUCoyOTEqRDgqMjAwNjA1MDF+CkVRKjMwfgpTRSoxMyoxMjM0fgpHRSoxKjEwMX4KSUVBKjEqMDAwMDAwMTAxfg==</inboundTemplate>
+        <inboundTemplate encoding="base64">SVNBKjAwKiAgICAgICAgICAqMDAqICAgICAgICAgICpaWipTWU5USFNFTkRFUiAgICAqWloqU1lOVEhSRUNFSVZFUiAgKjI0MDcwMSoxMjAwKl4qMDA1MDEqMDAwMDAwMTAxKjEqVCo6fgpHUypIQypTWU5USFNFTkRFUipTWU5USFJFQ0VJVkVSKjIwMjQwNzAxKjEyMDAqMTAxKlgqMDA1MDEwWDI3OUExfgpTVCoyNzAqMTIzNCowMDUwMTBYMjc5QTF+CkJIVCowMDIyKjEzKkRFTU8yNzAqMjAyNDA3MDEqMTIwMH4KSEwqMSoqMjAqMX4KTk0xKlBSKjIqREVNTyBQQVlFUioqKioqUEkqUEFZRVIwMDF+CkhMKjIqMSoyMSoxfgpOTTEqMVAqMipERU1PIFBST1ZJREVSKioqKipTVipQUk9WMDAxfgpITCozKjIqMjIqMH4KVFJOKjEqREVNTy1UUkFDRS0yNzAqREVNTy1DT05UUk9MfgpOTTEqSUwqMSpURVNUKk1FTUJFUioqKipNSSpNRU1CRVIwMDF+CkRNRypEOCoxOTgwMDEwMX4KRFRQKjI5MSpEOCoyMDI0MDcwMX4KRVEqMzB+ClNFKjEzKjEyMzR+CkdFKjEqMTAxfgpJRUEqMSowMDAwMDAxMDF+Cg==</inboundTemplate>
         <outboundTemplate encoding="base64">UGF5ZXIsTnVsbA0KUGF5ZXIgSWRlbnRpZmljYXRpb24gQ29kZSxOdWxsDQpQcm92aWRlcixOdWxsDQpQcm92aWRlciBJZGVudGlmaWNhdGlvbiBDb2RlLE51bGwNClN1YnNjcmliZXIgTmFtZSxOdWxsDQpTdWJzY3JpYmVyIElkZW50aWZpY2F0aW9uIENvZGUsTnVsbA0KU3Vic2NyaWJlciBET0IsTnVsbA0K</outboundTemplate>
         <inboundDataType>EDI/X12</inboundDataType>
         <outboundDataType>DELIMITED</outboundDataType>
