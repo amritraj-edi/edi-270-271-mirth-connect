@@ -31,5 +31,4 @@ Original sample/result files were intentionally not included because they contai
 ## Portfolio summary
 Created Mirth Connect channel mappings to transform selected X12 270 eligibility inquiry and 271 eligibility response data into CSV and XML formats, using sample inputs and output templates to demonstrate parsing and data mapping.
 
-## Provenance note
-This project originated as a technical assignment. Publish only if you are permitted to share the exported channel definitions and mapping logic. If ownership or assignment confidentiality is unclear, keep the repository private until you have approval.
+
